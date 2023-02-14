@@ -26,7 +26,7 @@ public class GameServiceTest {
     private GameService gameService;
 
     @Test
-    public void testInitialiseGame(){
+    public void testInitialiseGame() {
         final int TOTAL_COMBIN = 8;
         Game game = gameService.initializeGame();
 
@@ -35,11 +35,10 @@ public class GameServiceTest {
         Assert.assertEquals(TOTAL_COMBIN, gameService.getCombinWin().size());
     }
 
-
     @Test
-    public void testClearGame(){
+    public void testClearGame() {
         final int EMPTY_LIST = 0;
-        Game game = new Game ();
+        Game game = new Game();
         game.setStatus(GameStatus.FINISHED);
         game.setPlayer1(Player.X);
         game.setPlayer2(Player.O);
@@ -61,7 +60,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testPlayingGameInCaseInProgress(){
+    public void testPlayingGameInCaseInProgress() {
         gameService.initializeGame();
 
         gameService.playingGame(Player.X, 0);
@@ -71,7 +70,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testPlayingGameInCaseWinnerFound(){
+    public void testPlayingGameInCaseWinnerFound() {
         gameService.initializeGame();
         gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer1()).addAll(Arrays.asList(0, 4, 3));
         gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer2()).addAll(Arrays.asList(1, 8, 7));
@@ -83,7 +82,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testCheckWinnerInCaseGamePlayer1StartToProgress(){
+    public void testCheckWinnerInCaseGamePlayer1StartToProgress() {
         Game game = gameService.initializeGame();
         game.setStatus(GameStatus.IN_PROGRESS);
         gameService.setGame(game);
@@ -95,7 +94,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testCheckWinnerInCaseGamePlayer2Win(){
+    public void testCheckWinnerInCaseGamePlayer2Win() {
         Game game = gameService.initializeGame();
         game.setStatus(GameStatus.IN_PROGRESS);
         gameService.setGame(game);
@@ -109,7 +108,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testCheckDrawInCaseGameNotFinished(){
+    public void testCheckDrawInCaseGameNotFinished() {
         Game game = gameService.initializeGame();
         game.setStatus(GameStatus.IN_PROGRESS);
         gameService.setGame(game);
@@ -122,7 +121,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testCheckDrawInCaseGameFinished(){
+    public void testCheckDrawInCaseGameFinished() {
         Game game = gameService.initializeGame();
         game.setStatus(GameStatus.IN_PROGRESS);
         gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer1()).addAll(Arrays.asList(0, 2, 7, 6, 5));
@@ -133,9 +132,16 @@ public class GameServiceTest {
         Assert.assertEquals(GameStatus.FINISHED, gameService.getGame().getStatus());
         Assert.assertNull(gameService.getGame().getWinner());
     }
-    @Test
-    public void testFinishGame(){
-        //TODO
-    }
 
+    @Test
+    public void testFinishGame() {
+        Game game = new Game();
+        game.setStatus(GameStatus.IN_PROGRESS);
+        gameService.setGame(game);
+
+        gameService.finishGame();
+
+        Assert.assertNotNull(gameService.getGame());
+        Assert.assertEquals(GameStatus.FINISHED, gameService.getGame().getStatus());
+    }
 }

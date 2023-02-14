@@ -85,6 +85,7 @@ public class GameService {
     }
 
     public Game finishGame() {
+        game.setStatus(GameStatus.FINISHED);
         return game;
     }
 }
