@@ -108,7 +108,6 @@ public class GameServiceTest {
         Assert.assertEquals(Player.O, gameService.getGame().getWinner());
     }
 
-
     @Test
     public void testCheckDrawInCaseGameNotFinished(){
         Game game = gameService.initializeGame();
@@ -122,6 +121,18 @@ public class GameServiceTest {
         Assert.assertNotEquals(GameStatus.FINISHED, gameService.getGame().getStatus());
     }
 
+    @Test
+    public void testCheckDrawInCaseGameFinished(){
+        Game game = gameService.initializeGame();
+        game.setStatus(GameStatus.IN_PROGRESS);
+        gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer1()).addAll(Arrays.asList(0, 2, 7, 6, 5));
+        gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer2()).addAll(Arrays.asList(4, 3, 8, 1));
+
+        gameService.checkDraw();
+
+        Assert.assertEquals(GameStatus.FINISHED, gameService.getGame().getStatus());
+        Assert.assertNull(gameService.getGame().getWinner());
+    }
     @Test
     public void testFinishGame(){
         //TODO
