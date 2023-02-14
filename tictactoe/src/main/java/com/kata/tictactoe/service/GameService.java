@@ -54,7 +54,27 @@ public class GameService {
     }
 
     public boolean checkWinner(Player player, Integer index) {
+        final int INITIAL_COUNTER = 0;
+        final int TOTAL_COUNTER = 3;
 
+        listIndexPerPlayer.get(player).add(index);
+
+        for (Map.Entry<String, List<Integer>> set : combinWin.entrySet()) {
+            int counter = INITIAL_COUNTER;
+            for (Integer indexCombin : combinWin.get(set.getKey())) {
+
+                for (Integer indexPlayer : listIndexPerPlayer.get(player)) {
+                    if (Objects.equals(indexPlayer, indexCombin)) {
+                        counter++;
+                    }
+                }
+                if (counter == TOTAL_COUNTER) {
+                    game.setWinner(player);
+                    return true;
+                }
+            }
+        }
+        checkDraw();
         return false;
     }
 

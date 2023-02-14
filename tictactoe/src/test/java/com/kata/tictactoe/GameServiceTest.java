@@ -83,8 +83,30 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testCheckWinner(){
-        //TODO
+    public void testCheckWinnerInCaseGamePlayer2Win(){
+        Game game = gameService.initializeGame();
+        game.setStatus(GameStatus.IN_PROGRESS);
+        gameService.setGame(game);
+        gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer1()).addAll(Arrays.asList(1, 8, 7));
+        gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer2()).addAll(Arrays.asList(0, 4, 3));
+
+        boolean isPlayerYWinner = gameService.checkWinner(gameService.getGame().getPlayer2(), 6);
+
+        Assert.assertTrue(isPlayerYWinner);
+        Assert.assertEquals(Player.O, gameService.getGame().getWinner());
+    }
+
+    @Test
+    public void testCheckDrawInCaseGameNotFinished(){
+        Game game = gameService.initializeGame();
+        game.setStatus(GameStatus.IN_PROGRESS);
+        gameService.setGame(game);
+        gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer1()).addAll(Arrays.asList(1, 7, 2));
+        gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer2()).addAll(Arrays.asList(4, 3));
+
+        gameService.checkDraw();
+
+        Assert.assertNotEquals(GameStatus.FINISHED, gameService.getGame().getStatus());
     }
 
     @Test
