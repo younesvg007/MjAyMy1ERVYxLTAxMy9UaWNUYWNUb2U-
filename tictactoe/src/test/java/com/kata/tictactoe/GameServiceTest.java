@@ -59,4 +59,14 @@ public class GameServiceTest {
         Assert.assertEquals(EMPTY_LIST, gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer1()).size());
         Assert.assertEquals(EMPTY_LIST, gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer2()).size());
     }
+
+    @Test
+    public void testPlayingGameInCaseInProgress(){
+        //TODO
+    }
+
+    @Test
+    public void testPlayingGameInCaseWinnerFound(){
+        //TODO
+    }
 }

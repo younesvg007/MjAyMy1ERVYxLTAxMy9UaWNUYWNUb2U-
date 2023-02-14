@@ -43,4 +43,9 @@ public class GameService {
                 game.getPlayer2(), new ArrayList<>()
         ));
     }
+
+    public Game playingGame(Player player, Integer index) {
+
+        return game;
+    }
 }
