@@ -42,4 +42,18 @@ public class GameRestTest {
         Assert.assertEquals(200, response.getStatusCodeValue());
         Assert.assertEquals(game, response.getBody());
     }
+
+    @Test
+    public void testFinish(){
+        Game game = new Game();
+        game.setPlayer1(Player.X);
+        game.setPlayer2(Player.O);
+        game.setStatus(GameStatus.FINISHED);
+        when(gameService.finishGame()).thenReturn(game);
+
+        ResponseEntity<Game> response = gameRest.finish();
+
+        Assert.assertEquals(200, response.getStatusCodeValue());
+        Assert.assertEquals(game, response.getBody());
+    }
 }

@@ -21,4 +21,9 @@ public class GameRest {
     public ResponseEntity<Game> initialize() {
         return ResponseEntity.ok(gameService.initializeGame());
     }
+
+    @PostMapping("/finish")
+    public ResponseEntity<Game> finish() {
+        return ResponseEntity.ok(gameService.finishGame());
+    }
 }
