@@ -45,7 +45,24 @@ public class GameService {
     }
 
     public Game playingGame(Player player, Integer index) {
+        game.setStatus(GameStatus.IN_PROGRESS);
 
+        if (checkWinner(player, index)) {
+            finishGame();
+        }
+        return game;
+    }
+
+    public boolean checkWinner(Player player, Integer index) {
+
+        return false;
+    }
+
+    public void checkDraw() {
+
+    }
+
+    public Game finishGame() {
         return game;
     }
 }

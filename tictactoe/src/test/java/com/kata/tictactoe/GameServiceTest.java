@@ -62,11 +62,39 @@ public class GameServiceTest {
 
     @Test
     public void testPlayingGameInCaseInProgress(){
-        //TODO
+        gameService.initializeGame();
+
+        gameService.playingGame(Player.X, 0);
+
+        Assert.assertNotNull(gameService.getGame());
+        Assert.assertEquals(GameStatus.IN_PROGRESS, gameService.getGame().getStatus());
     }
 
     @Test
     public void testPlayingGameInCaseWinnerFound(){
+        gameService.initializeGame();
+        gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer1()).addAll(Arrays.asList(0, 4, 3));
+        gameService.getListIndexPerPlayer().get(gameService.getGame().getPlayer2()).addAll(Arrays.asList(1, 8, 7));
+
+        gameService.playingGame(Player.X, 6);
+
+        Assert.assertNotNull(gameService.getGame());
+        Assert.assertNotEquals(GameStatus.IN_PROGRESS, gameService.getGame().getStatus());
+    }
+
+    @Test
+    public void testCheckWinner(){
         //TODO
     }
+
+    @Test
+    public void testCheckDraw(){
+        //TODO
+    }
+
+    @Test
+    public void testFinishGame(){
+        //TODO
+    }
+
 }
