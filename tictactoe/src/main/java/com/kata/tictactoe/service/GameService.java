@@ -79,7 +79,9 @@ public class GameService {
     }
 
     public void checkDraw() {
-
+        if (listIndexPerPlayer.get(game.getPlayer1()).size() + listIndexPerPlayer.get(game.getPlayer2()).size() == game.getTOTAL_INDEX()) {
+            finishGame();
+        }
     }
 
     public Game finishGame() {
