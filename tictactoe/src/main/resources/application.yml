@@ -1,0 +1,6 @@
+server:
+  port: 3002
+
+spring:
+  main:
+    web-application-type: servlet
